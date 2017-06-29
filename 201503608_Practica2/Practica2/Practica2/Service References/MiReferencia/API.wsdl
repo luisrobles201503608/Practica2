@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://ws/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="API" targetNamespace="http://ws/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://practica2-ipc2vj17.rhcloud.com:80/practica2/API?xsd=1" namespace="http://ws/" />
+    </xsd:schema>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://practica2-ipc2vj17.rhcloud.com:80/practica2/API?xsd=2" namespace="http://jaxb.dev.java.net/array" />
+    </xsd:schema>
+  </types>
+  <message name="hello_world">
+    <part name="carnet" type="xsd:string" />
+  </message>
+  <message name="hello_worldResponse">
+    <part name="return" type="xsd:string" />
+  </message>
+  <message name="crearEstudiante">
+    <part name="carnet_operario" type="xsd:int" />
+    <part name="carnet" type="xsd:int" />
+    <part name="nombres" type="xsd:string" />
+    <part name="apellidos" type="xsd:string" />
+  </message>
+  <message name="crearEstudianteResponse">
+    <part name="return" type="xsd:boolean" />
+  </message>
+  <message name="crearEvento">
+    <part name="carnet_operario" type="xsd:int" />
+    <part name="nombre_evento" type="xsd:string" />
+    <part name="descripcion" type="xsd:string" />
+    <part name="tipo_evento" type="xsd:string" />
+  </message>
+  <message name="crearEventoResponse">
+    <part name="return" type="xsd:boolean" />
+  </message>
+  <message name="AsistirEvento">
+    <part name="carnet_operario" type="xsd:int" />
+    <part name="id_evento" type="xsd:int" />
+    <part name="carnet" type="xsd:int" />
+  </message>
+  <message name="AsistirEventoResponse">
+    <part name="return" type="xsd:boolean" />
+  </message>
+  <message name="MostrarEventos">
+    <part name="carnet_operario" type="xsd:int" />
+  </message>
+  <message name="MostrarEventosResponse">
+    <part name="return" type="tns:eventoArray" />
+  </message>
+  <message name="getTiposDeEvento">
+    <part name="carnet_operario" type="xsd:int" />
+  </message>
+  <message name="getTiposDeEventoResponse">
+    <part xmlns:ns1="http://jaxb.dev.java.net/array" name="return" type="ns1:stringArray" />
+  </message>
+  <message name="getEstudiantes">
+    <part name="carnet_operario" type="xsd:int" />
+  </message>
+  <message name="getEstudiantesResponse">
+    <part name="return" type="tns:estudianteArray" />
+  </message>
+  <portType name="API">
+    <operation name="hello_world">
+      <input wsam:Action="http://ws/API/hello_worldRequest" message="tns:hello_world" />
+      <output wsam:Action="http://ws/API/hello_worldResponse" message="tns:hello_worldResponse" />
+    </operation>
+    <operation name="crearEstudiante" parameterOrder="carnet_operario carnet nombres apellidos">
+      <input wsam:Action="http://ws/API/crearEstudianteRequest" message="tns:crearEstudiante" />
+      <output wsam:Action="http://ws/API/crearEstudianteResponse" message="tns:crearEstudianteResponse" />
+    </operation>
+    <operation name="crearEvento" parameterOrder="carnet_operario nombre_evento descripcion tipo_evento">
+      <input wsam:Action="http://ws/API/crearEventoRequest" message="tns:crearEvento" />
+      <output wsam:Action="http://ws/API/crearEventoResponse" message="tns:crearEventoResponse" />
+    </operation>
+    <operation name="AsistirEvento" parameterOrder="carnet_operario id_evento carnet">
+      <input wsam:Action="http://ws/API/AsistirEventoRequest" message="tns:AsistirEvento" />
+      <output wsam:Action="http://ws/API/AsistirEventoResponse" message="tns:AsistirEventoResponse" />
+    </operation>
+    <operation name="MostrarEventos">
+      <input wsam:Action="http://ws/API/MostrarEventosRequest" message="tns:MostrarEventos" />
+      <output wsam:Action="http://ws/API/MostrarEventosResponse" message="tns:MostrarEventosResponse" />
+    </operation>
+    <operation name="getTiposDeEvento">
+      <input wsam:Action="http://ws/API/getTiposDeEventoRequest" message="tns:getTiposDeEvento" />
+      <output wsam:Action="http://ws/API/getTiposDeEventoResponse" message="tns:getTiposDeEventoResponse" />
+    </operation>
+    <operation name="getEstudiantes">
+      <input wsam:Action="http://ws/API/getEstudiantesRequest" message="tns:getEstudiantes" />
+      <output wsam:Action="http://ws/API/getEstudiantesResponse" message="tns:getEstudiantesResponse" />
+    </operation>
+  </portType>
+  <binding name="APIPortBinding" type="tns:API">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <operation name="hello_world">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://ws/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://ws/" />
+      </output>
+    </operation>
+    <operation name="crearEstudiante">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://ws/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://ws/" />
+      </output>
+    </operation>
+    <operation name="crearEvento">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://ws/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://ws/" />
+      </output>
+    </operation>
+    <operation name="AsistirEvento">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://ws/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://ws/" />
+      </output>
+    </operation>
+    <operation name="MostrarEventos">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://ws/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://ws/" />
+      </output>
+    </operation>
+    <operation name="getTiposDeEvento">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://ws/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://ws/" />
+      </output>
+    </operation>
+    <operation name="getEstudiantes">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" namespace="http://ws/" />
+      </input>
+      <output>
+        <soap:body use="literal" namespace="http://ws/" />
+      </output>
+    </operation>
+  </binding>
+  <service name="API">
+    <port name="APIPort" binding="tns:APIPortBinding">
+      <soap:address location="http://practica2-ipc2vj17.rhcloud.com:80/practica2/API" />
+    </port>
+  </service>
+</definitions>
